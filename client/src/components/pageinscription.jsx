@@ -4,6 +4,7 @@ import Fields from "./fields";
 
 
 export default function Pageinscription() {
+    
     const [identity, setIdentity] = useState([])
     const handleSubmit = (e) => {
         e.preventDefault()

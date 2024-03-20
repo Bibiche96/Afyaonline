@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Homepage from './components/Homepage'
 import Navbar from './components/Navbar'
 import Pageinscription from "./components/pageinscription";
+import Connexion from "./components/pageconnexion";
 
 
 function App() {
@@ -12,7 +13,9 @@ function App() {
     //   <Navbar />
     //   <Home />
     // </Homepage>
-    <Pageinscription/>
+    // <Pageinscription/>
+
+    <Connexion/>
 
   )
 }
