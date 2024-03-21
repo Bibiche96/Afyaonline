@@ -5,6 +5,7 @@ import Homepage from './components/Homepage'
 import Navbar from './components/Navbar'
 import Pageinscription from "./components/pageinscription";
 import Connexion from "./components/pageconnexion";
+import Doctorprofile from "./components/doctorprofile";
 
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
     // </Homepage>
     // <Pageinscription/>
 
-    <Connexion/>
+    // <Connexion/>
+
+    <Doctorprofile/>
 
   )
 }
