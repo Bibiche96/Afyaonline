@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Pageinscription from "./components/pageinscription";
 import Connexion from "./components/pageconnexion";
 import Doctorprofile from "./components/doctorprofile";
+import Dashboard from "./components/dashboard";
 
 
 function App() {
@@ -18,7 +19,9 @@ function App() {
 
     // <Connexion/>
 
-    <Doctorprofile/>
+    // <Doctorprofile/>
+
+    <Dashboard/>
 
   )
 }
