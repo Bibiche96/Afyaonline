@@ -8,7 +8,8 @@ import Doctors from "./Doctors";
 import About from "./About";
 import { FaHeart } from "react-icons/fa";
 import Testimonials from "./Testimonials";
-import Footer from "./Footer";
+
+import { Link } from "react-router-dom";
 import { Route, Routes } from 'react-router-dom';
 
 
@@ -24,9 +25,11 @@ export default function Home() {
                         <div className="h-3/4 bg-[rgb(19,17,108)] rounded-l-3xl flex">
                             <div className="flex flex-col ml-20 mt-20">
                                 <p className=" text-white text-6xl leading-relaxed">Prends ton <br /> rendez-vous <br /> en ligne avec  Afya online</p>
-                                <div className=" mt-20">
-                                    <Btn text={'Prendre rendez-vous'} action={() => { }} icon={<ImCalendar className=" text-xl" />} textcolor={"white"} bgcolor={"[#220CAD]"} />
-                                </div>
+                                <Link to="/doctor">
+                                    <div className=" mt-20">
+                                        <Btn text={'Prendre rendez-vous'} action={() => { }} icon={<ImCalendar className=" text-xl" />} textcolor={"white"} bgcolor={"[#220CAD]"} />
+                                    </div>
+                                </Link>
                             </div>
                         </div>
 
@@ -91,7 +94,7 @@ export default function Home() {
                     </div>
 
                 </div>
-                < Footer />
+                
 
             </div>
 
