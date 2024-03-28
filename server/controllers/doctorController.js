@@ -16,19 +16,22 @@ exports.registerDoctor = async (req, res) => {
                 availability,
                 qualifications,
                 password: hashedPassword,
-
             }
         });
+        doctor.password = null
         res.status(201).json({ message: 'Doctor enregistré avec succè', doctor });
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred while registering the doctor' });
+        console.log(error)
+        res.status(500).json({ error });
+
+
     }
 };
 
 exports.loginDoctor = async (req, res) => {
     try {
-        const { firstName, lastName, password } = req.body;
-        const doctor = await prisma.Doctor.findUnique({ where: { firstName, lastName } });
+        const { firstName, lastName,email, password } = req.body;
+        const doctor = await prisma.Doctor.findUnique({ where: { email,firstName, lastName } });
         if (!doctor) {
             return res.status(404).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
         }
@@ -36,7 +39,7 @@ exports.loginDoctor = async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
         }
-        const token = jwt.sign({ id: doctor.id, role: 'patient' }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: doctor.id, role: 'doctor' }, process.env.JWT_SECRET, { algorithm: 'RS256' }, { expiresIn: '1h' });
         res.json({ token });
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while logging in the doctor' });

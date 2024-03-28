@@ -33,7 +33,7 @@ model Doctor {
   lastName       String
   email          String  @unique
   password       String?
-  specialty      String
+  speciality     String
   availability   String?
   qualifications String?
 

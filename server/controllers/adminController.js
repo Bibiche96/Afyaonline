@@ -15,16 +15,18 @@ exports.registerAdmin = async (req, res) => {
                 password: hashedPassword
             }
         });
+        admin.password = null
         res.status(201).json({ message: 'Admin registered successfully', admin });
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred while registering the admin' });
+        console.log(error);
+        res.status(500).json({ error });
     }
 };
 
 exports.loginAdmin = async (req, res) => {
     try {
-        const { firstName, lastName, password } = req.body;
-        const admin = await prisma.Admin.findUnique({ where: { firstName, lastName } });
+        const { firstName, lastName, email, password } = req.body;
+        const admin = await prisma.Admin.findUnique({ where: { email, firstName, lastName } });
         if (!admin) {
             return res.status(404).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
         }
@@ -32,9 +34,10 @@ exports.loginAdmin = async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
         }
-        const token = jwt.sign({ id: admin.id, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: admin.id, role: 'admin' }, process.env.JWT_SECRET, { algorithm: 'RS256' }, { expiresIn: '1h' });
         res.json({ token });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: 'An error occurred while logging in the admin' });
     }
 };

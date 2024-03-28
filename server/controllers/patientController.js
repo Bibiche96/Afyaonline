@@ -20,18 +20,19 @@ exports.registerPatient = async (req, res) => {
                 password: hashedPassword
             }
         });
+        patient.password = null
         res.status(200).json({ message: 'Patient enregistré avec succès', patient });
     } catch (error) {
-
-        res.status(500).json({ error: 'Une erreur est survenue lors de l\'enregistrement du patient' });
+        console.log(error)
+        res.status(500).json({ error });
     }
 };
 
 
 exports.loginPatient = async (req, res) => {
     try {
-        const { firstName, lastName, password } = req.body;
-        const patient = await prisma.Patient.findUnique({ where: { firstName, lastName } });
+        const { firstName, lastName, email, password } = req.body;
+        const patient = await prisma.Patient.findUnique({ where: { email, firstName, lastName } });
         if (!patient) {
             return res.status(404).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
         }
@@ -39,11 +40,11 @@ exports.loginPatient = async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
         }
-        const token = jwt.sign({ id: patient.id, role: 'patient' }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: patient.id, role: 'patient' }, process.env.JWT_SECRET, { algorithm: 'RS256' }, { expiresIn: '1h' });
         res.json({ token });
     } catch (error) {
-
-        res.status(500).json({ error: 'An error occurred while logging in the patient' });
+        console.log(error)
+        res.status(500).json({ error });
     }
 };
 
