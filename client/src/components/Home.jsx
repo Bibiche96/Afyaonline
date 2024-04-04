@@ -19,8 +19,8 @@ export default function Home() {
     return (
         <>
 
-            <div className=" w-full h-auto flex flex-col">
-                <div className=" flex h-screen mx-40  mt-9 ">
+            <div className=" w-full h-auto flex flex-col ">
+                <div className=" flex h-screen mx-40  mt-9  ">
                     <div className="flex flex-col w-2/3">
                         <div className="h-3/4 bg-[rgb(19,17,108)] rounded-l-3xl flex">
                             <div className="flex flex-col ml-20 mt-20">
@@ -49,24 +49,30 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div id="OUR DOCTORS" className="mt-20 mx-40 h-96">
+                <div id="Doctors" className="mt-20 mx-40 h-96">
                     <div className="flex ">
                         <div className=" h-1/4 w-3/4 flex  gap-40 pl-20 rounded-2xl bg-white items-center mb-5">
                             <h1 className="text-5xl">OUR DOCTORS</h1>
                             <Btn text={'Cardiologue'} action={() => { }} icon={<FaHeartPulse className=" text-xl" />} textcolor={"[#BFB9B9]"} bgcolor={"[#BFB9B9]"} />
                         </div>
-                        <div className="w-1/4 bg-[#D9D9D9] rounded-t-2xl">
+
+                    </div>
+                    <div className="   bg-[#D9D9D9] rounded-l-2xl rounded-br-2xl">
+                        <div className="flex h-3/4 justify-around">
+                            <Doctors />
+                            <Doctors />
+                            <Doctors />
+                            <Doctors />
+                            <Doctors />
 
                         </div>
-                    </div>
-                    <div className=" h-3/4 border bg-[#D9D9D9] rounded-l-2xl rounded-br-2xl">
-                        <Doctors />
+
                     </div>
                 </div>
 
 
 
-                <div id="About Us" className=" flex mx-40 mt-20">
+                <div id="About Us" className=" flex mx-40 mt-20 lg:mx-40">
                     <About />
                     <div className=" w-1/2 h-auto">
                         <div className="flex justify-center items-center h-96 relative">
@@ -89,12 +95,19 @@ export default function Home() {
 
                         </div>
                     </div>
-                    <div className=" h-96 bg-[#D9D9D9] flex rounded-b-3xl">
-                        <Testimonials />
+                    <div className="  bg-[#D9D9D9] flex rounded-b-3xl">
+                        <div className="h-96 flex justify-around">
+                            <Testimonials />
+                            <Testimonials />
+                            <Testimonials />
+                            <Testimonials />
+                            <Testimonials />
+                        </div>
+
                     </div>
 
                 </div>
-                
+
 
             </div>
 

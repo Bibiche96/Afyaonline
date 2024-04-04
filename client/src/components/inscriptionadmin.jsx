@@ -1,22 +1,44 @@
 import { useState } from "react";
 import Btn from "./UI/Btn";
 import Fields from "./fields";
+import { Link } from "react-router-dom";
+
+export default function Inscriptionadmin() {
+    const [datadmin, setDatadin] = useState({
+        nom: '',
+        prenom: '',
+        email: '',
+        password: '',
+    })
+    const handleChange = (id, value) => {
+        setDatadin(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
+    };
 
 
-export default function Pageinscription() {
-    
-    const [identity, setIdentity] = useState([])
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const form = e.target
-        let data = new FormData(form)
-        let objidentity = Object.fromEntries(data)
         form.reset()
-        setIdentity([objidentity, ...identity])
-    }
+
+        try {
+            const response = await axios.post("http://localhost:5000/registerAdmin", datadmin);
+            console.log(response.data);
+
+
+            // history.push("/accueil");
+        } catch (error) {
+            console.error("Erreur lors de la soumission du formulaire :", error);
+
+        }
+    };
+
 
     return (
         <>
+
             <div className="bg-[#D9D9D9] h-screen  flex">
 
                 <div className=" w-2/4 border">
@@ -32,12 +54,11 @@ export default function Pageinscription() {
                                     <p>Or</p>
                                     <form onSubmit={handleSubmit} action="" className="flex flex-col items-center justify-center  space-y-4">
                                         <div className="flex gap-3 pr-5">
-                                            <Fields props={{ id: "nom", placeholder: "nom" }} inputWidth={48} />
-                                            <Fields props={{ id: "prenom", placeholder: "prenom" }} inputWidth={48} />
+                                            <Fields props={{ id: "nom", placeholder: "nom" }} onChnage={handleChange} inputWidth={48} />
+                                            <Fields props={{ id: "prenom", placeholder: "prenom" }} onChnage={handleChange} inputWidth={48} />
                                         </div>
-                                        <Fields props={{ id: "spécialité", placeholder: "votre Spécialite" }} inputWidth={64} />
-                                        <Fields props={{ id: "email", type: "email", placeholder: "email" }} inputWidth={64} />
-                                        <Fields props={{ id: "mot de pass", placeholder: "Entrez votre mot de pass" }} inputWidth={64} />
+                                        <Fields props={{ id: "email", type: "email", placeholder: "email" }} onChnage={handleChange} inputWidth={64} />
+                                        <Fields props={{ id: "mot de pass", placeholder: "Entrez votre mot de pass" }} onChnage={handleChange} inputWidth={64} />
                                         <div className=" mt-20" >
                                             <Btn text={'Envoyer ma demande'} action={() => { }} textcolor={"white"} bgcolor={"[#220CAD]"} />
                                         </div>
@@ -60,6 +81,7 @@ export default function Pageinscription() {
 
 
             </div>
+
 
 
         </>

@@ -36,10 +36,10 @@ export default function Footer() {
 
                     </div>
                 </div>
-                <div className="text-[#220CAD]">
-                    <FaFacebookF />
-                    <BsInstagram />
-                    <RiTwitterXFill />
+                <div className="text-[#220CAD] space-y-8 ">
+                    <FaFacebookF className="text-2xl" />
+                    <BsInstagram className="text-2xl" />
+                    <RiTwitterXFill className="text-2xl" />
                 </div>
 
 

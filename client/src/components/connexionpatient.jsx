@@ -1,11 +1,27 @@
 import Btn from "./UI/Btn";
 import Fields from "./fields";
+import axios from 'axios';
+import { useState } from "react";
 
-export default function ConnexionDoctor() {
-    const handleSubmit = (e) => {
+export default function ConnexionPatient() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const form = e.target
         form.reset()
+
+        try {
+            const response = await axios.post("http://localhost:5000/loginPatient", { email, password });
+            console.log(response.data);
+        } catch (error) {
+            console.error("Erreur lors de la connexion :", error);
+
+        }
 
     }
     return (
@@ -22,10 +38,10 @@ export default function ConnexionDoctor() {
 
                         <div className="flex flex-col space-y-4">
                             <form onSubmit={handleSubmit} action="" className="flex flex-col space-y-4">
-                                <Fields props={{ id: "email", name: "Email", type: "email", placeholder: "Entrez votre email" }} inputWidth={80} className="border bg-gray-400" />
-                                <Fields props={{ id: "mot de pass", name: "Password", placeholder: "Entrez votre mot de pass" }} inputWidth={64} />
+                                <Fields props={{ id: "email", name: "Email", type: "email", placeholder: "Entrez votre email" }} onChange={(e) => setEmail(e.target.value)} inputWidth={80} className="border bg-gray-400" />
+                                <Fields props={{ id: "mot de pass", name: "Password", placeholder: "Entrez votre mot de pass" }} onChange={(e) => setPassword(e.target.value)} inputWidth={64} />
                                 <div className=" mt-20 " >
-                                    <Btn text={'Sign In'} action={() => { }} textcolor={"white"} bgcolor={"[#220CAD]"} className="text-center" />
+                                    <Btn text={'Sign In'} action={() => { }} textcolor={"white"} bgcolor={"[#220CAD]"} />
                                 </div>
 
 

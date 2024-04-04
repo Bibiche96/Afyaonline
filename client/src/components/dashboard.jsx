@@ -3,10 +3,33 @@ import { IoSearch } from "react-icons/io5";
 import { FiPlus } from "react-icons/fi";
 import Doctorslist from "./doctorslist";
 import Sidebar from "./sidebar";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 
 export default function Dashboard() {
+    const [doctors, setDoctors] = useState([]);
+    const [patients, setPatients] = useState([]);
 
+    useEffect(() => {
+        // Récupérer les médecins
+        axios.get('http://localhost:5000/Doctors')
+            .then(response => {
+                setDoctors(response.data);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des médecins:', error);
+            });
+
+        // Récupérer les patients
+        axios.get('http://localhost:5000/Patients')
+            .then(response => {
+                setPatients(response.data);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des patients:', error);
+            });
+    }, []);
 
 
     return (
@@ -18,9 +41,7 @@ export default function Dashboard() {
 
                 </div>
                 <div className=" ml-12  text-xl mt-4 space-y-3">
-                    <Sidebar text={"Home"} />
-                    <Sidebar text={"Doctors"} />
-                    <Sidebar text={"Patients"} />
+                    <Sidebar />
                 </div>
             </div>
             <div className="w-full p-4">

@@ -3,7 +3,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import Btn from "./UI/Btn";
 import Doctorimage from "client/src/assets/images/istockphoto-1201657177-612x612-removebg-preview.png";
 import { ImCalendar } from "react-icons/im";
-
+import { Link } from "react-router-dom";
 
 
 export default function Doctors() {
@@ -23,7 +23,7 @@ export default function Doctors() {
     ]);
     return (
         <>
-            <div className=" bg-white w-64 ml-12 h-56 rounded-2xl mt-9">
+            <div className=" bg-white w-64 ml-12 h-56 rounded-2xl my-10">
                 {doctors.map(doctor =>
                     <div key={doctor.id} >
                         <div className=" h-1/4 bg-[#220CAD] w-full flex rounded-br-2xl rounded-tl-2xl  items-center ">
@@ -39,9 +39,11 @@ export default function Doctors() {
                             <p className="text-[#BDB4B4] "> {doctor.location} </p>
                         </div>
                         <div className="flex justify-center  ">
-                            <div className=" mt-8 w-48  ">
-                                <Btn text={'Prendre rendez-vous'} action={() => { }} icon={<ImCalendar className=" text-xl" />} textcolor={"white"} bgcolor={"[#220CAD]"} />
-                            </div>
+                            <Link to="/appointmentform">
+                                <div className=" mt-8 w-48  ">
+                                    <Btn text={'Prendre rendez-vous'} action={() => { }} icon={<ImCalendar className=" text-xl" />} textcolor={"white"} bgcolor={"[#220CAD]"} />
+                                </div>
+                            </Link>
                         </div>
 
 

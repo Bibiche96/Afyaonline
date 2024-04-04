@@ -13,7 +13,7 @@ export default function Navlink({ name, buttontext, href }) {
 
         setIsActive(true);
 
-        const section = document.querySelector(href);
+        const section = document.querySelector(`#${name}`);
         if (section) {
             window.scrollTo({
                 top: section.offsetTop,
